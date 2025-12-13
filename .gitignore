@@ -1,0 +1,55 @@
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+*.env
+.env
+
+# Logs
+*.log
+
+# MODEL FILES - DO NOT UPLOAD (LLaMA model stays safe locally)
+colab_imports/
+models/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+
+# HuggingFace cache
+huggingface/
+hf_cache/
+~/.cache/huggingface/
+
+# Training checkpoints
+checkpoint/
+checkpoints/
+outputs/
+
+# Frontend (node)
+node_modules/
+build/
+dist/
+.next/
+out/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
