@@ -1,4 +1,4 @@
-Commands to Test API Request Backend
+Commands to Test API Request Backend(in terminal)
 ollama --version
 ollama pull llama3
 ollama run llama3
