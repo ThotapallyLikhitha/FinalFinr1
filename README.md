@@ -9,7 +9,11 @@ python -m pip install fastapi uvicorn requests
 python -m ensurepip --upgrade
 python -m pip install --upgrade pip
 python -m uvicorn app:app --reload
-in chrome open http://127.0.0.1:8000/docs after that to test
+in chrome open http://127.0.0.1:8000/docs after that to test--> 
+{
+  "message": "What is the stock market?"
+}
+
 
 Commands to RUN Frontend Gpt interface (inside terminal)
 cd "C:\Users\raksh\Downloads\finr1llm-main (1)\finr1llm-main\finchatgpt"
