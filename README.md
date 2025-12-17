@@ -1,4 +1,28 @@
-Commands to Test API Request Backend(in terminal)
+⚙️ Setup Instructions
+1️⃣ Clone the Repository
+git clone https://github.com/ThotapallyLikhitha/FinalFinr1.git
+cd FinalFinr1
+2️⃣ Backend Setup
+cd backend
+npm install
+Create a .env file inside backend/:
+MONGO_URI=your_mongodb_connection_string
+PORT=3000
+Run the backend:
+node server.js
+3️⃣ Ollama Setup (LLaMA)
+Make sure Ollama is installed.
+Pull the model:
+ollama pull llama3.2:1b
+Ollama runs locally at:
+http://localhost:11434
+4️⃣ Access the Application
+Open browser and go to:
+http://localhost:3000/login
+Register a new user
+Login
+Start chatting with Fin-R1
+**//Commands to Test API Request Backend(in terminal)
 ollama --version
 ollama pull llama3
 ollama run llama3
@@ -35,7 +59,7 @@ python -m pip install flask_sqlalchemy
 (terminal 2) In new terminal--> ollama run llama3.2:1b
 and test What is stock market?
 and back to (terminal 1) python app.py
-
+//**
 
  
 
