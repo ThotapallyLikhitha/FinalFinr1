@@ -2,33 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FinChatGPT</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b132b;
+      color: white;
+      padding: 20px;
+    }
+    #chatBox {
+      max-width: 800px;
+      margin: auto;
+    }
+    .msg {
+      margin: 10px 0;
+    }
+    .user {
+      color: #4cc9f0;
+    }
+    .bot {
+      color: #f1fa8c;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+    }
+    button {
+      padding: 10px;
+    }
+  </style>
 </head>
+
 <body>
-  <div class="sidebar">
-    <h2 class="logo">FinChatGPT</h2>
-    <div class="user-info">
-      <p>Welcome to FinChatGPT, <strong>{{ user.username }}</strong> 💬</p>
-    </div>
-    <button onclick="window.location.href='/logout'" class="logout-btn">Logout</button>
+  <div id="chatBox">
+    <h2 id="welcome"></h2>
+
+    <div id="messages"></div>
+
+    <input id="question" placeholder="Ask FinChatGPT..." />
+    <button onclick="send()">Send</button>
+
+    <br><br>
+    <button onclick="logout()">Logout</button>
   </div>
 
-  <div class="chat-container">
-    <div id="chat-box" class="chat-box">
-      {% for chat in chats %}
-        <div class="user-message"><strong>You:</strong> {{ chat.user_input }}</div>
-        <div class="bot-message"><strong>FinChatGPT:</strong> {{ chat.bot_response }}</div>
-      {% endfor %}
-    </div>
+  <script>
+    // Load user
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      window.location.href = "/login";
+    }
 
-    <div class="input-container">
-      <input type="text" id="user-input" placeholder="Ask FinChatGPT anything about finance..." />
-      <button id="send-btn">Send</button>
-    </div>
-  </div>
+    document.getElementById("welcome").innerText =
+      "Welcome to FinChatGPT, " + user.username;
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+    async function send() {
+      const q = document.getElementById("question").value;
+      if (!q) return;
+
+      addMsg("You", q, "user");
+
+      const res = await fetch("http://localhost:3000/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q })
+      });
+
+      const data = await res.json();
+      addMsg("FinChatGPT", data.answer || "No response", "bot");
+      document.getElementById("question").value = "";
+    }
+
+    function addMsg(sender, text, cls) {
+      const div = document.createElement("div");
+      div.className = "msg " + cls;
+      div.innerHTML = `<b>${sender}:</b> ${text}`;
+      document.getElementById("messages").appendChild(div);
+    }
+
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+    }
+  </script>
 </body>
 </html>
