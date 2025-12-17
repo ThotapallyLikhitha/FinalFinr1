@@ -53,3 +53,7 @@ out/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Databases
+*.db
+finchatgpt/finchatgpt/instance/
